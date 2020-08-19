@@ -1,6 +1,5 @@
 import requests
-import json
-import csv
+import pandas
 
 #Request the JSON from the API and print it out the Response Status to the screen
 astros = requests.get('http://api.open-notify.org/astros.json')
@@ -14,8 +13,7 @@ print("JSON Response:\n",astros_json)
 print("Number of people in space:",astros_json['number'])
 
 #To print the names of people in space using a for loop
-for p in astros_json['people']:
-    print('Astronaut Name: {} \t Craft: {}'.format(p['name'],p['craft']))
+df = pd.DataFrame.from_dict(astros_json)
 
 #---Code below is attempting to save the output in a txt file. Not working because of TypeError JSON object must be str, not dict
 dict = astros_json
